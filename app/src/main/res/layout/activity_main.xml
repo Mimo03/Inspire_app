@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
     android:layout_height="match_parent"
     tools:context=".activites.MainActivity">
     <RelativeLayout
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="inSpire"
-            android:textColor="#1A1A1A"
+            android:textColor="?android:attr/textColor"
             android:textSize="22sp"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
             android:layout_height="wrap_content">
             <Switch
                 android:layout_width="wrap_content"
+                android:id="@+id/btnSwitch"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:layout_width="25dp"

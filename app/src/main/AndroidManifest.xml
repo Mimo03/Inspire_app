@@ -14,13 +14,25 @@
         android:theme="@style/Theme.Inspire_app"
         tools:targetApi="31">
         <activity
-            android:name=".activites.MainActivity"
+            android:name=".activites.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activites.LoginActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".activites.PostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activites.MainActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 package com.example.inspire_app.fragments;
 
+import static androidx.compose.ui.geometry.SizeKt.Size;
+
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,15 +13,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.inspire_app.R;
+import com.example.inspire_app.activites.PostActivity;
 import com.example.inspire_app.adapters.HorzRecyclerAdapter;
 import com.example.inspire_app.adapters.PostRecyclerAdapter;
+import com.example.inspire_app.interfaces.Postonclickrecyclerview;
+import com.google.android.material.card.MaterialCardView;
+
+import java.util.concurrent.TimeUnit;
+
+import nl.dionsegijn.konfetti.core.Party;
+import nl.dionsegijn.konfetti.core.PartyFactory;
+import nl.dionsegijn.konfetti.core.Position;
+import nl.dionsegijn.konfetti.core.emitter.Emitter;
+import nl.dionsegijn.konfetti.core.emitter.EmitterConfig;
+import nl.dionsegijn.konfetti.core.models.Shape;
+import nl.dionsegijn.konfetti.core.models.Size;
+import nl.dionsegijn.konfetti.xml.KonfettiView;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     HorzRecyclerAdapter adapter;
     RecyclerView postrecycler;
+    Party party;
+    MaterialCardView cardView;
+    KonfettiView konfettiView;
     PostRecyclerAdapter recyclerAdapter;
 
 
@@ -36,6 +58,28 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        cardView = view.findViewById(R.id.hotpickscard);
+        konfettiView = view.findViewById(R.id.konfettiView);
+        Shape.DrawableShape drawableshapes= new Shape.DrawableShape(this.getContext().getDrawable(R.drawable.ic_baseline_android_24),true);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"clicked",Toast.LENGTH_LONG).show();
+                EmitterConfig emitterConfig = new Emitter(300,TimeUnit.MILLISECONDS).max(300);
+                konfettiView.start(
+                        new PartyFactory(emitterConfig)
+                                .shapes(Shape.Circle.INSTANCE,Shape.Square.INSTANCE)
+                                .spread(360)
+                                .position(0.5,0.25,1,1)
+                                .sizes(new Size(8,50,10))
+                                .timeToLive(10000)
+                                .fadeOutEnabled(true)
+                                .build()
+                );
+            }
+        });
         recyclerView = view.findViewById(R.id.horizontalscroll);
         adapter = new HorzRecyclerAdapter(this.getContext());
         recyclerView.setAdapter(adapter);
@@ -43,7 +87,13 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         postrecycler = view.findViewById(R.id.postrecyclerview);
-        recyclerAdapter = new PostRecyclerAdapter(this.getContext());
+        recyclerAdapter = new PostRecyclerAdapter(this.getContext(), new Postonclickrecyclerview() {
+            @Override
+            public void onclick() {
+                Intent intent = new Intent(getContext(), PostActivity.class);
+                startActivity(intent);
+            }
+        });
         postrecycler.setAdapter(recyclerAdapter);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this.getContext());
         postrecycler.setLayoutManager(linearLayoutManager1);

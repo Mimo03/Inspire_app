@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.inspire_app"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -37,5 +37,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'nl.dionsegijn:konfetti-compose:2.0.1'
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.1'
 
 }

@@ -9,13 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inspire_app.R;
+import com.example.inspire_app.interfaces.Postonclickrecyclerview;
 
 public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder>{
     Context context;
+    Postonclickrecyclerview postonclickrecyclerview;
 
 
-    public PostRecyclerAdapter(Context context) {
+    public PostRecyclerAdapter(Context context,Postonclickrecyclerview postonclickrecyclerview) {
+
         this.context = context;
+        this.postonclickrecyclerview = postonclickrecyclerview;
     }
     @NonNull
     @Override
@@ -27,6 +31,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PostRecyclerAdapter.MyViewHolder holder, int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postonclickrecyclerview.onclick();
+            }
+        });
 
 
     }

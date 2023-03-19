@@ -2,15 +2,20 @@ package com.example.inspire_app.activites;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.example.inspire_app.R;
 import com.example.inspire_app.adapters.HorzRecyclerAdapter;
@@ -24,11 +29,38 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView btnView;
+    Switch btnswitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme);
+        }
+        else{
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        btnswitch = findViewById(R.id.btnSwitch);
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            btnswitch.setChecked(true);
+        }
+
+        btnswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    restartactivity();
+                }
+                else{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    restartactivity();
+                }
+            }
+        });
 
 
 
@@ -52,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-//        btnView.setSelectedItemId(R.id.nav_home);
+        btnView.setSelectedItemId(R.id.nav_home);
     }
 
     public void giveFragment(Fragment fragment, boolean flag){
@@ -66,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ft.commit();
+    }
+    public void restartactivity(){
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
     }
 
 }
