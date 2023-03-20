@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="?attr/backgroundColor"
+    android:layout_height="match_parent"
+    tools:context=".activites.PostActivity">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="@drawable/image"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JVSH Technology"
+            android:textSize="18sp"
+            android:textColor="?android:attr/textColor"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:text="# startup"
+        android:textAllCaps="false"
+        app:cornerRadius="37dp"
+        android:layout_marginStart="10dp"
+        android:paddingVertical="10dp"
+        android:backgroundTint="#BC62FF"
+        android:paddingHorizontal="20dp"
+        android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/ic_icon_material_favorite"
+                    android:layout_gravity="center"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/ic_group_747"
+                    android:layout_gravity="center"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/ic_icon_feather_send"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_icon_feather_share_2"
+                android:layout_gravity="center"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20,253 likes"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColor"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/textview5"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            android:textColor="?android:attr/textColor"
+            android:textSize="15sp" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#30707070"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_header_container" />
+
+    </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="JVSH Technology "-->
+<!--                android:textColor="#BC62FF"-->
+<!--                android:textSize="18dp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="6dp"-->
+<!--                android:backgroundTint="@color/purple_200">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/ic_baseline_check_24" />-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            &lt;!&ndash;            <com.google.android.material.button.MaterialButton&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_width="42dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginLeft="5dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:drawableRight="@drawable/ic_baseline_check_24"&ndash;&gt;-->
+<!--            &lt;!&ndash;                app:cornerRadius="25dp"/>&ndash;&gt;-->
+
+<!--        </LinearLayout>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="8dp"-->
+<!--            app:cardCornerRadius="20dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="@drawable/image" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="10dp"-->
+<!--            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="15dp" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="10dp"-->
+<!--        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="15dp" />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="# startup "-->
+<!--        android:textColor="#BC62FF"-->
+<!--        android:textSize="18dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:textStyle="bold" />-->
+
+<!--    </LinearLayout>-->
+

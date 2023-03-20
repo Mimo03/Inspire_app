@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ProfileFragment">
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="match_parent"
+        android:paddingTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/image" />
+
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal|bottom"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:text="Change"-->
+<!--            android:background="@color/black"-->
+<!--            android:textSize="12sp"-->
+<!--            />-->
+
+
+    </FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Erlich Bachman"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="?android:attr/textColor"
+        android:gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="abc@gmail.com"
+        android:textSize="13dp"
+        android:textColor="?android:attr/textColor"
+        android:gravity="center_horizontal"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:text="Edit profile"
+        android:textAllCaps="false"
+        app:cornerRadius="37dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingVertical="10dp"
+        android:backgroundTint="#BC62FF"
+        android:paddingHorizontal="20dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:textColor="?android:attr/textColor"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/cardBackgroundColor"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColor"
+                android:text="Turn on Notification"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invite Link"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:textColor="?android:attr/textColor"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/cardBackgroundColor"
+        app:cardCornerRadius="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Invite People"
+                android:textSize="15dp"
+                android:textColor="?android:attr/textColor" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:text="Share"
+                android:textAllCaps="false"
+                app:cornerRadius="37dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#BC62FF"
+                android:paddingHorizontal="20dp"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutbtn"
+        android:layout_width="match_parent"
+        android:text="Log Out"
+        android:textColor="?android:attr/textColor"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        app:cornerRadius="37dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="?attr/backgroundColor"
+        android:paddingHorizontal="20dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#BC62FF"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+</LinearLayout>
