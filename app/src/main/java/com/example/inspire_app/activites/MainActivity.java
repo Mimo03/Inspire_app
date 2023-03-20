@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView btnView;
     Switch btnswitch;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent i = getIntent();
+        name = i.getStringExtra("name");
+
 
 
         btnswitch = findViewById(R.id.btnSwitch);
@@ -90,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
     public void giveFragment(Fragment fragment, boolean flag){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("name",name);
+        fragment.setArguments(bundle);
+
         if(flag){
             ft.add(R.id.container2,fragment);
         }

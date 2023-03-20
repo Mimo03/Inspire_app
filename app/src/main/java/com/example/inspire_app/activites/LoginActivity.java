@@ -1,22 +1,38 @@
 package com.example.inspire_app.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inspire_app.R;
+import com.example.inspire_app.models.LoginData;
+import com.example.inspire_app.responsemodels.LoginResponse;
 import com.example.inspire_app.utils.LoginManager;
+import com.example.inspire_app.viewmodels.LoginViewModel;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
+    String moodleid,password2;
     LoginManager loginManager;
+    LoginViewModel viewModel;
+    String name;
+    List<LoginData> data = new ArrayList<>();
+    String token;
+    String apipass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +45,45 @@ public class LoginActivity extends AppCompatActivity {
         loginManager = new LoginManager(this);
         loginButton = findViewById(R.id.loginButton);
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().isEmpty()) {
+                moodleid = username.getText().toString();
+                password2 = password.getText().toString();
+                if (moodleid.isEmpty()) {
                     username.setError("Enter Moodle Id");
                 }
-                if (password.getText().toString().isEmpty()) {
+                if (password2.isEmpty()) {
                     password.setError("Enter Password");
                 }
-                if (username.getText().toString().equals("20102119") && password.getText().toString().equals("1234")){
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    loginManager.SetLoginStatus(true);
-                    startActivity(intent);
-                    Toast.makeText(LoginActivity.this,"Login Successful!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LoginActivity.this,"Incorrect Username or Password", Toast.LENGTH_SHORT).show();
+                else{
+                    viewModel=new ViewModelProvider(LoginActivity.this).get(LoginViewModel.class);
+                    viewModel.btnvalidate(LoginActivity.this.getApplication(),username.getText().toString(),token);
+                    viewModel.getCreateUserLiveData().observe(LoginActivity.this, new Observer<LoginResponse>() {
+                        @Override
+                        public void onChanged(LoginResponse loginResponse) {
+                            data = loginResponse.getData();
+                                token = loginResponse.getToken();
+                                name = loginResponse.getData().get(0).getName();
+                                apipass = loginResponse.getData().get(0).getPassword();
+                                if(apipass.equals(password2)){
+                                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                    i.putExtra("name",name);
+                                    startActivity(i);
+                                    loginManager.settoken(token);
+                                    loginManager.SetLoginStatus(true);
+                                }
+                                else{
+                                    Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+
+                    });
+
+
                 }
             }
         });

@@ -59,27 +59,27 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        cardView = view.findViewById(R.id.hotpickscard);
-        konfettiView = view.findViewById(R.id.konfettiView);
-        Shape.DrawableShape drawableshapes= new Shape.DrawableShape(this.getContext().getDrawable(R.drawable.ic_baseline_android_24),true);
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"clicked",Toast.LENGTH_LONG).show();
-                EmitterConfig emitterConfig = new Emitter(300,TimeUnit.MILLISECONDS).max(300);
-                konfettiView.start(
-                        new PartyFactory(emitterConfig)
-                                .shapes(Shape.Circle.INSTANCE,Shape.Square.INSTANCE)
-                                .spread(360)
-                                .position(0.5,0.25,1,1)
-                                .sizes(new Size(8,50,10))
-                                .timeToLive(10000)
-                                .fadeOutEnabled(true)
-                                .build()
-                );
-            }
-        });
+//        cardView = view.findViewById(R.id.hotpickscard);
+//        konfettiView = view.findViewById(R.id.konfettiView);
+//        Shape.DrawableShape drawableshapes= new Shape.DrawableShape(this.getContext().getDrawable(R.drawable.ic_baseline_android_24),true);
+//
+//        cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(),"clicked",Toast.LENGTH_LONG).show();
+//                EmitterConfig emitterConfig = new Emitter(300,TimeUnit.MILLISECONDS).max(300);
+//                konfettiView.start(
+//                        new PartyFactory(emitterConfig)
+//                                .shapes(Shape.Circle.INSTANCE,Shape.Square.INSTANCE)
+//                                .spread(360)
+//                                .position(0.5,0.25,1,1)
+//                                .sizes(new Size(8,50,10))
+//                                .timeToLive(10000)
+//                                .fadeOutEnabled(true)
+//                                .build()
+//                );
+//            }
+//        });
         recyclerView = view.findViewById(R.id.horizontalscroll);
         adapter = new HorzRecyclerAdapter(this.getContext());
         recyclerView.setAdapter(adapter);
