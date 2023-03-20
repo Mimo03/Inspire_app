@@ -1,5 +1,7 @@
 package com.example.inspire_app.activites;
 
+import static com.example.inspire_app.R.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
