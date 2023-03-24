@@ -15,130 +15,10 @@
         android:textSize="24dp"
         android:textColor="?android:attr/textColor"
         android:layout_margin="12dp"/>
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="8dp"
-        android:orientation="vertical">
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            app:cardCornerRadius="10dp"
-            app:strokeColor="@color/purple_200"
-            app:strokeWidth="2dp"
-            android:backgroundTint="?attr/cardBackgroundColor"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:padding="15dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/image"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:layout_marginRight="80dp"
-                        android:text="JVSH Technology #startup"
-                        android:textColor="?android:attr/textColor"/>
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#BC62FF"
-                        android:background="@drawable/ic_icon_material_favorite"/>
-
-
-
-                </LinearLayout>
-
-            </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            app:cardCornerRadius="10dp"
-            android:layout_marginTop="15dp"
-            app:strokeColor="@color/purple_200"
-            app:strokeWidth="2dp"
-            android:backgroundTint="?attr/cardBackgroundColor"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:padding="15dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/image"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:layout_marginRight="80dp"
-                        android:text="JVSH Technology #startup"
-                        android:textColor="?android:attr/textColor"/>
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#BC62FF"
-                        android:background="@drawable/ic_icon_material_favorite"/>
-
-
-
-                </LinearLayout>
-
-            </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            app:cardCornerRadius="10dp"
-            android:layout_marginTop="15dp"
-            app:strokeColor="@color/purple_200"
-            android:backgroundTint="?attr/cardBackgroundColor"
-            app:strokeWidth="2dp"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:padding="15dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/image"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:layout_marginRight="80dp"
-                        android:text="JVSH Technology #startup"
-                        android:textColor="?android:attr/textColor"/>
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#BC62FF"
-                        android:background="@drawable/ic_icon_material_favorite"/>
-
-
-
-                </LinearLayout>
-
-            </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
+        android:layout_height="wrap_content"
+        android:id="@+id/liked_recyclerview"/>
 <!--        <LinearLayout-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:weightSum="2"-->
@@ -194,4 +74,3 @@
 
 
 
-</LinearLayout>

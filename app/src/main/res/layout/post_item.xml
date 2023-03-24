@@ -31,6 +31,7 @@
                 android:layout_marginStart="10dp">
 
                 <TextView
+                    android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="# Internship"
@@ -66,15 +67,58 @@
                 app:cardCornerRadius="20dp">
 
                 <ImageView
+                    android:id="@+id/post_image"
                     android:layout_width="wrap_content"
                     android:layout_height="300dp"
                     android:background="@drawable/image" />
             </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="5dp"
+                        android:id="@+id/likedbtn"
+                        android:clickable="true"
+                        android:background="@drawable/ic_icon_material_favorite"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ic_group_747"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ic_icon_feather_send"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_icon_feather_share_2"
+                    android:layout_gravity="center"/>
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/post_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
                 android:textColor="?android:attr/textColor"
                 android:textSize="15dp" />

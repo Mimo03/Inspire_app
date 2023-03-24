@@ -95,10 +95,9 @@ public class MainActivity extends AppCompatActivity {
     public void giveFragment(Fragment fragment, boolean flag){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putString("name",name);
-        fragment.setArguments(bundle);
-
+//        Bundle bundle = new Bundle();
+//        bundle.putString("name",name);
+//        fragment.setArguments(bundle);
         if(flag){
             ft.add(R.id.container2,fragment);
         }
