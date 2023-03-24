@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
-    String moodleid,password2;
+    String moodleid,password2,moodle;
     LoginManager loginManager;
     LoginViewModel viewModel;
     String name;
@@ -66,12 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                             data = loginResponse.getData();
                                 token = loginResponse.getToken();
                                 name = loginResponse.getData().get(0).getName();
+                                moodle = loginResponse.getData().get(0).getMoodleID();
                                 apipass = loginResponse.getData().get(0).getPassword();
                                 if(apipass.equals(password2)){
                                     Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
                                     Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                     i.putExtra("name",name);
                                     startActivity(i);
+                                    loginManager.setname(name);
+                                    loginManager.setMoodleid(moodle);
                                     loginManager.settoken(token);
                                     loginManager.SetLoginStatus(true);
                                 }

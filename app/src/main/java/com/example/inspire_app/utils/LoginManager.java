@@ -74,11 +74,11 @@ public class LoginManager {
         return sharedPreferences.getString(name, "");
     }
 
-    public void setEmailid(String email) {
+    public void setMoodleid(String email) {
         editor.putString(emailid, email).commit();
     }
 
-    public String getEmailid() {
+    public String getMoodleid() {
         return sharedPreferences.getString(emailid, "");
 
     }

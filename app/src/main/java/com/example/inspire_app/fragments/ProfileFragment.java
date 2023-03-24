@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.inspire_app.R;
 import com.example.inspire_app.activites.LoginActivity;
@@ -20,6 +21,7 @@ import com.google.android.material.button.MaterialButton;
 public class ProfileFragment extends Fragment {
     MaterialButton logoutbtn;
     LoginManager loginManager;
+    TextView name,moodleid;
 
 
 
@@ -40,11 +42,18 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        name = view.findViewById(R.id.setname);
+        moodleid = view.findViewById(R.id.moodleid);
+        loginManager = new LoginManager(getContext());
+
+
+        name.setText(loginManager.getname());
+        moodleid.setText(loginManager.getMoodleid());
+
         logoutbtn = view.findViewById(R.id.logoutbtn);
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginManager = new LoginManager(getContext());
                 loginManager.SetLoginStatus(false);
 
                 loginManager.removeSharedPreference();

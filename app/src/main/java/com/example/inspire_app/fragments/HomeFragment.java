@@ -7,21 +7,40 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inspire_app.R;
+import com.example.inspire_app.activites.LoginActivity;
+import com.example.inspire_app.activites.MainActivity;
 import com.example.inspire_app.activites.PostActivity;
 import com.example.inspire_app.adapters.HorzRecyclerAdapter;
 import com.example.inspire_app.adapters.PostRecyclerAdapter;
+import com.example.inspire_app.interfaces.LikedOnclickrecycler;
 import com.example.inspire_app.interfaces.Postonclickrecyclerview;
+import com.example.inspire_app.models.PostData;
+import com.example.inspire_app.models.PostLikedData;
+import com.example.inspire_app.responsemodels.GetLikedResponse;
+import com.example.inspire_app.responsemodels.LoginResponse;
+import com.example.inspire_app.responsemodels.PostLikedResponse;
+import com.example.inspire_app.responsemodels.PostResponse;
+import com.example.inspire_app.utils.LoginManager;
+import com.example.inspire_app.viewmodels.LikedPostViewModel;
+import com.example.inspire_app.viewmodels.LoginViewModel;
+import com.example.inspire_app.viewmodels.PostViewModel;
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import nl.dionsegijn.konfetti.core.Party;
@@ -38,9 +57,15 @@ public class HomeFragment extends Fragment {
     HorzRecyclerAdapter adapter;
     RecyclerView postrecycler;
     Party party;
+    String name;
+    TextView nametext;
     MaterialCardView cardView;
     KonfettiView konfettiView;
+    LoginManager loginManager;
     PostRecyclerAdapter recyclerAdapter;
+    PostViewModel viewModel;
+    List<PostData> data = new ArrayList<>();
+    LikedPostViewModel likedPostViewModel;
 
 
     public HomeFragment() {
@@ -80,23 +105,72 @@ public class HomeFragment extends Fragment {
 //                );
 //            }
 //        });
+        loginManager = new LoginManager(getContext());
+//        Bundle bundle = getArguments();
+//        name = bundle.getString("name");
+
+        nametext = view.findViewById(R.id.nametext);
+        nametext.setText(loginManager.getname());
+
+        viewModel=new ViewModelProvider(HomeFragment.this).get(PostViewModel.class);
+        viewModel.btnnewpost(getActivity().getApplication());
+        viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
+            @Override
+            public void onChanged(PostResponse postResponse) {
+                data = postResponse.getData();
+                postrecycler = view.findViewById(R.id.postrecyclerview);
+                recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
+                    @Override
+                    public void onclick() {
+                        Intent intent = new Intent(getContext(), PostActivity.class);
+                        startActivity(intent);
+                    }
+                }, new LikedOnclickrecycler() {
+                    @Override
+                    public void onclick(String id, String category, String org, String image) {
+                        Toast.makeText(getContext(),"clicked",Toast.LENGTH_LONG).show();
+                        btnpostclicked(id,category,org,image);
+//                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
+//                        imageButton.setClickable(false);
+//                        imageButton.setBackgroundColor(Color.RED);
+
+                    }
+                });
+                        postrecycler.setAdapter(recyclerAdapter);
+                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
+                postrecycler.setLayoutManager(linearLayoutManager1);
+            }
+        });
+
         recyclerView = view.findViewById(R.id.horizontalscroll);
         adapter = new HorzRecyclerAdapter(this.getContext());
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        postrecycler = view.findViewById(R.id.postrecyclerview);
-        recyclerAdapter = new PostRecyclerAdapter(this.getContext(), new Postonclickrecyclerview() {
-            @Override
-            public void onclick() {
-                Intent intent = new Intent(getContext(), PostActivity.class);
-                startActivity(intent);
-            }
-        });
-        postrecycler.setAdapter(recyclerAdapter);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this.getContext());
-        postrecycler.setLayoutManager(linearLayoutManager1);
         return view;
     }
-}
+    private void btnpostclicked (String id,String category,String org,String image){
+
+        PostLikedData data = new PostLikedData(category,org,image,id);
+        initViewModel();
+        likedPostViewModel.btnpost(this.getActivity().getApplication(),data);
+    }
+
+    private void initViewModel () {
+        likedPostViewModel = new ViewModelProvider(this).get(LikedPostViewModel.class);
+        likedPostViewModel.getCreateUserLiveData2().observe(this, new Observer<PostLikedResponse>() {
+            @Override
+            public void onChanged(PostLikedResponse postLikedResponse) {
+                if (postLikedResponse == null) {
+                    Toast.makeText(HomeFragment.this.getContext(),"Failed",Toast.LENGTH_SHORT).show();
+//                    error.setText("Please enter correct OTP");
+                } else {
+                    Toast.makeText(HomeFragment.this.getContext(), postLikedResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+
+                }
+        });
+        }
+    }
