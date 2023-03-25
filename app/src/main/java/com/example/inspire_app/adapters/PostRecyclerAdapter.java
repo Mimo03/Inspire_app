@@ -52,11 +52,11 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public void onBindViewHolder(@NonNull PostRecyclerAdapter.MyViewHolder holder, int position) {
         holder.category.setText("# " + dataList.get(position).getCategory());
         holder.content.setText(dataList.get(position).getContent());
-        Picasso.with(context).load(dataList.get(position).getImageurl()).into(holder.imageView);
+//        Picasso.with(context).load(dataList.get(position).getImageurl()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                postonclickrecyclerview.onclick();
+                postonclickrecyclerview.onclick(dataList.get(position).get_id());
             }
         });
         holder.liked.setOnClickListener(new View.OnClickListener() {

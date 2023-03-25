@@ -20,11 +20,14 @@ import com.example.inspire_app.adapters.LikedPostRecyclerAdaptere;
 import com.example.inspire_app.adapters.PostRecyclerAdapter;
 import com.example.inspire_app.interfaces.LikedOnclickrecycler;
 import com.example.inspire_app.interfaces.Postonclickrecyclerview;
+import com.example.inspire_app.interfaces.RemoveOnclickrecycler;
 import com.example.inspire_app.models.GetLiked;
+import com.example.inspire_app.responsemodels.DeleteLikedResponse;
 import com.example.inspire_app.responsemodels.GetLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
 import com.example.inspire_app.viewmodels.LikedPostViewModel;
 import com.example.inspire_app.viewmodels.PostViewModel;
+import com.example.inspire_app.viewmodels.RemovedLikedViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ public class LikeProfile extends Fragment {
     RecyclerView recyclerView;
     LikedPostViewModel viewModel;
     List<GetLiked> data = new ArrayList<>();
+    RemovedLikedViewModel removedLikedViewModel;
 
 
 
@@ -61,11 +65,27 @@ public class LikeProfile extends Fragment {
             public void onChanged(GetLikedResponse getLikedResponse) {
                 data = getLikedResponse.getData();
                 recyclerView = view.findViewById(R.id.liked_recyclerview);
-                adapter = new LikedPostRecyclerAdaptere(getContext(),data,new Postonclickrecyclerview() {
+                adapter = new LikedPostRecyclerAdaptere(getContext(), data, new Postonclickrecyclerview() {
                     @Override
-                    public void onclick() {
+                    public void onclick(String id) {
                         Intent intent = new Intent(getContext(), PostActivity.class);
+                        intent.putExtra("id", id);
                         startActivity(intent);
+                    }
+                }, new RemoveOnclickrecycler() {
+                    @Override
+                    public void onclick(String id) {
+                        removedLikedViewModel=new ViewModelProvider(LikeProfile.this).get(RemovedLikedViewModel.class);
+                        removedLikedViewModel.btnremove(getActivity().getApplication(),id);
+                        removedLikedViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<DeleteLikedResponse>() {
+                            @Override
+                            public void onChanged(DeleteLikedResponse deleteLikedResponse) {
+                                Toast.makeText(getContext(),deleteLikedResponse.getMessage()+"",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        viewModel.btnnewpost(getActivity().getApplication());
+
+
                     }
                 });
                 recyclerView.setAdapter(adapter);
