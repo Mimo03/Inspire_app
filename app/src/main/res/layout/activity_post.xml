@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:background="?attr/backgroundColor"
     android:layout_height="match_parent"
     tools:context=".activites.PostActivity">
         <ImageView
@@ -15,6 +14,7 @@
             android:background="@drawable/image"/>
 
         <TextView
+            android:id="@+id/org"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="JVSH Technology"
@@ -24,6 +24,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="7dp"/>
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/categorybtn"
         android:layout_width="wrap_content"
         android:text="# startup"
         android:textAllCaps="false"
@@ -48,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:backgroundTint="?android:attr/textColor"
                     android:background="@drawable/ic_icon_material_favorite"
                     android:layout_gravity="center"/>
                 <ImageView
@@ -55,11 +57,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
                     android:background="@drawable/ic_group_747"
+                    android:backgroundTint="?android:attr/textColor"
                     android:layout_gravity="center"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
+                    android:backgroundTint="?android:attr/textColor"
                     android:background="@drawable/ic_icon_feather_send"
                     android:layout_gravity="center"/>
             </LinearLayout>
@@ -68,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:layout_alignParentRight="true"
+                android:backgroundTint="?android:attr/textColor"
                 android:background="@drawable/ic_icon_feather_share_2"
                 android:layout_gravity="center"/>
         </RelativeLayout>
@@ -82,7 +87,7 @@
             android:textColor="?android:attr/textColor"
             android:textSize="15sp" />
         <TextView
-            android:id="@+id/textview5"
+            android:id="@+id/details"
             android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"

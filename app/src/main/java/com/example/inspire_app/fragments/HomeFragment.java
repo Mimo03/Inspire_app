@@ -121,9 +121,11 @@ public class HomeFragment extends Fragment {
                 postrecycler = view.findViewById(R.id.postrecyclerview);
                 recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
                     @Override
-                    public void onclick() {
-                        Intent intent = new Intent(getContext(), PostActivity.class);
-                        startActivity(intent);
+                    public void onclick(String id) {
+                        Intent i = new Intent(getContext(),PostActivity.class);
+                        i.putExtra("id",id);
+                        startActivity(i);
+
                     }
                 }, new LikedOnclickrecycler() {
                     @Override

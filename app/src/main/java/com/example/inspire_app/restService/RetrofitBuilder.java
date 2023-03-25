@@ -31,6 +31,7 @@ public class RetrofitBuilder {
         //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
 
+
         //OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         // HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         // loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
