@@ -25,8 +25,8 @@ public interface ApiInterface {
     @GET("/postget")
     Call<PostResponse> getnewpost(@Header("Authorization") String Token);
 
-    @GET("/getliked")
-    Call<GetLikedResponse> getliked(@Header("Authorization") String Token);
+    @GET("/getliked/{user}")
+    Call<GetLikedResponse> getliked(@Header("Authorization") String Token,@Path("user")String user);
 
     @GET("/getdetails/{id}")
     Call<GetDetailsResponse> getdetails(@Header("Authorization") String Token, @Path("id")String _id);

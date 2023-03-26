@@ -63,34 +63,46 @@ public class LikeProfile extends Fragment {
         viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<GetLikedResponse>() {
             @Override
             public void onChanged(GetLikedResponse getLikedResponse) {
-                data = getLikedResponse.getData();
-                recyclerView = view.findViewById(R.id.liked_recyclerview);
-                adapter = new LikedPostRecyclerAdaptere(getContext(), data, new Postonclickrecyclerview() {
-                    @Override
-                    public void onclick(String id) {
-                        Intent intent = new Intent(getContext(), PostActivity.class);
-                        intent.putExtra("id", id);
-                        startActivity(intent);
-                    }
-                }, new RemoveOnclickrecycler() {
-                    @Override
-                    public void onclick(String id) {
-                        removedLikedViewModel=new ViewModelProvider(LikeProfile.this).get(RemovedLikedViewModel.class);
-                        removedLikedViewModel.btnremove(getActivity().getApplication(),id);
-                        removedLikedViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<DeleteLikedResponse>() {
+                try {
+                    if (getLikedResponse.getData() == null) {
+//
+                        Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        data = getLikedResponse.getData();
+                        recyclerView = view.findViewById(R.id.liked_recyclerview);
+                        adapter = new LikedPostRecyclerAdaptere(getContext(), data, new Postonclickrecyclerview() {
                             @Override
-                            public void onChanged(DeleteLikedResponse deleteLikedResponse) {
-                                Toast.makeText(getContext(),deleteLikedResponse.getMessage()+"",Toast.LENGTH_SHORT).show();
+                            public void onclick(String id) {
+                                Intent intent = new Intent(getContext(), PostActivity.class);
+                                intent.putExtra("id", id);
+                                startActivity(intent);
+                            }
+                        }, new RemoveOnclickrecycler() {
+                            @Override
+                            public void onclick(String id) {
+                                removedLikedViewModel = new ViewModelProvider(LikeProfile.this).get(RemovedLikedViewModel.class);
+                                removedLikedViewModel.btnremove(getActivity().getApplication(), id);
+                                removedLikedViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<DeleteLikedResponse>() {
+                                    @Override
+                                    public void onChanged(DeleteLikedResponse deleteLikedResponse) {
+                                        Toast.makeText(getContext(), deleteLikedResponse.getMessage() + "", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                viewModel.btnnewpost(getActivity().getApplication());
+
+
                             }
                         });
-                        viewModel.btnnewpost(getActivity().getApplication());
-
+                        recyclerView.setAdapter(adapter);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(linearLayoutManager);
 
                     }
-                });
-                recyclerView.setAdapter(adapter);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

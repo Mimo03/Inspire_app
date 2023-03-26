@@ -55,7 +55,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 loginManager.SetLoginStatus(false);
-
                 loginManager.removeSharedPreference();
 
                 startActivity(new Intent(getContext(), SplashActivity.class));

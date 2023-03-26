@@ -47,10 +47,10 @@ public class LikedPostRecyclerAdaptere extends RecyclerView.Adapter<LikedPostRec
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postonclickrecyclerview.onclick(data.get(position).getPostid());
+                postonclickrecyclerview.onclick(data.get(position).getPostid().get_id());
             }
         });
-        holder.category.setText(data.get(position).getOrganization() + "#" + data.get(position).getCategory());
+        holder.category.setText(data.get(position).getPostid().getOrganization() + " #"+data.get(position).getPostid().getCategory());
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

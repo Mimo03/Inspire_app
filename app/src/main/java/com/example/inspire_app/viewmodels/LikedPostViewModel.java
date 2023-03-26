@@ -42,7 +42,7 @@ public class LikedPostViewModel extends ViewModel {
     public void btnnewpost(Application application){
         LoginManager loginManager = new LoginManager(application);
         ApiInterface apiInterface = RetrofitBuilder.getInstance(application).getApi();
-        Call<GetLikedResponse> call = apiInterface.getliked("Bearer "+loginManager.gettoken());
+        Call<GetLikedResponse> call = apiInterface.getliked("Bearer "+loginManager.gettoken(),loginManager.getid());
         call.enqueue(new Callback<GetLikedResponse>() {
             @Override
             public void onResponse(Call<GetLikedResponse> call, Response<GetLikedResponse> response) {

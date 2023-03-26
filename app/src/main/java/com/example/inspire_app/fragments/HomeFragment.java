@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
     }
     private void btnpostclicked (String id,String category,String org,String image){
 
-        PostLikedData data = new PostLikedData(category,org,image,id);
+        PostLikedData data = new PostLikedData(loginManager.getid(), id);
         initViewModel();
         likedPostViewModel.btnpost(this.getActivity().getApplication(),data);
     }

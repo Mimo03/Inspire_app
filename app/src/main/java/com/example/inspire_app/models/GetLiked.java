@@ -2,17 +2,13 @@ package com.example.inspire_app.models;
 
 public class GetLiked {
     private String _id;
-    private String category;
-    private String organization;
-    private String imageurl;
-    private String postid;
+    private String user;
+    private PostID postid;
     private int __v;
 
-    public GetLiked(String _id, String category, String organization, String imageurl, String postid, int __v) {
+    public GetLiked(String _id, String user, PostID postid, int __v) {
         this._id = _id;
-        this.category = category;
-        this.organization = organization;
-        this.imageurl = imageurl;
+        this.user = user;
         this.postid = postid;
         this.__v = __v;
     }
@@ -25,35 +21,19 @@ public class GetLiked {
         this._id = _id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getUser() {
+        return user;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
-
-    public String getImageurl() {
-        return imageurl;
-    }
-
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
-    }
-
-    public String getPostid() {
+    public PostID getPostid() {
         return postid;
     }
 
-    public void setPostid(String postid) {
+    public void setPostid(PostID postid) {
         this.postid = postid;
     }
 

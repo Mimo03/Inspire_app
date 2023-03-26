@@ -52,6 +52,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public void onBindViewHolder(@NonNull PostRecyclerAdapter.MyViewHolder holder, int position) {
         holder.category.setText("# " + dataList.get(position).getCategory());
         holder.content.setText(dataList.get(position).getContent());
+        holder.org.setText(dataList.get(position).getOrganization());
 //        Picasso.with(context).load(dataList.get(position).getImageurl()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +79,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView category,content;
+        TextView category,content,org;
         ImageView liked;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -86,6 +87,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             imageView = itemView.findViewById(R.id.post_image);
             category = itemView.findViewById(R.id.category);
             content = itemView.findViewById(R.id.post_content);
+            org = itemView.findViewById(R.id.org_content);
             liked = itemView.findViewById(R.id.likedbtn);
 
 

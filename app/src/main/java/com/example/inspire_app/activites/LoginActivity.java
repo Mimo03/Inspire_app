@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     String moodleid,password2,moodle;
     LoginManager loginManager;
     LoginViewModel viewModel;
-    String name;
+    String name,id;
     List<LoginData> data = new ArrayList<>();
     String token;
     String apipass;
@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 token = loginResponse.getToken();
                                 name = loginResponse.getData().get(0).getName();
                                 moodle = loginResponse.getData().get(0).getMoodleID();
+                                id = loginResponse.getData().get(0).get_id();
                                 apipass = loginResponse.getData().get(0).getPassword();
                                 if(apipass.equals(password2)){
                                     Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                     loginManager.setname(name);
                                     loginManager.setMoodleid(moodle);
                                     loginManager.settoken(token);
+                                    loginManager.setid(id);
                                     loginManager.SetLoginStatus(true);
                                 }
                                 else{

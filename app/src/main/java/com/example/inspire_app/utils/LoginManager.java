@@ -83,11 +83,11 @@ public class LoginManager {
 
     }
 
-    public void setNumber(String number) {
+    public void setid(String number) {
         editor.putString(mobilenumber, number).commit();
     }
 
-    public String getnumber() {
+    public String getid() {
         return sharedPreferences.getString(mobilenumber, "");
 
     }
