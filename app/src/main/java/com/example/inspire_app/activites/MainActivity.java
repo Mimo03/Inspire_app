@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView btnView;
     Switch btnswitch;
+    ImageView bellicon;
     String name;
 
     @Override
@@ -64,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     restartactivity();
                 }
+            }
+        });
+
+        bellicon = findViewById(R.id.bell);
+        bellicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,NotificationActivity.class));
             }
         });
 

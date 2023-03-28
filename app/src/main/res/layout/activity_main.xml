@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:layout_width="25dp"
+                android:id="@+id/bell"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_baseline_notifications_24"/>
 

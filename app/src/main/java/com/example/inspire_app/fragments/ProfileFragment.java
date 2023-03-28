@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton;
 
 
 public class ProfileFragment extends Fragment {
-    MaterialButton logoutbtn;
+    MaterialButton logoutbtn,share;
     LoginManager loginManager;
     TextView name,moodleid;
 
@@ -49,6 +49,18 @@ public class ProfileFragment extends Fragment {
 
         name.setText(loginManager.getname());
         moodleid.setText(loginManager.getMoodleid());
+
+        share = view.findViewById(R.id.sharebtn);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hey, download this app!");
+                startActivity(shareIntent);
+            }
+        });
 
         logoutbtn = view.findViewById(R.id.logoutbtn);
         logoutbtn.setOnClickListener(new View.OnClickListener() {

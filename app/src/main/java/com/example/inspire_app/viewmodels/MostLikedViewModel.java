@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.inspire_app.responsemodels.LoginResponse;
-import com.example.inspire_app.responsemodels.PostResponse;
+import com.example.inspire_app.responsemodels.GetDetailsResponse;
+import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.restService.ApiInterface;
 import com.example.inspire_app.restService.RetrofitBuilder;
 import com.example.inspire_app.utils.LoginManager;
@@ -19,24 +19,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostViewModel extends ViewModel {
-    private MutableLiveData<PostResponse> createUserLiveData;
+public class MostLikedViewModel extends ViewModel {
+    private MutableLiveData<MostLikedResponse> createUserLiveData;
 
-    public PostViewModel(){
+    public MostLikedViewModel(){
         createUserLiveData = new MutableLiveData<>();
 
     }
-    public LiveData<PostResponse> getCreateUserLiveData() {
+    public LiveData<MostLikedResponse> getCreateUserLiveData() {
         return createUserLiveData;
     }
 
-    public void btnnewpost(Application application,String category){
+    public void btnmostliked(Application application){
         LoginManager loginManager = new LoginManager(application);
         ApiInterface apiInterface = RetrofitBuilder.getInstance(application).getApi();
-        Call<PostResponse> call = apiInterface.getnewpost("Bearer "+loginManager.gettoken(),category);
-        call.enqueue(new Callback<PostResponse>() {
+        Call<MostLikedResponse> call = apiInterface.getmostliked("Bearer "+loginManager.gettoken());
+        call.enqueue(new Callback<MostLikedResponse>() {
             @Override
-            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+            public void onResponse(Call<MostLikedResponse> call, Response<MostLikedResponse> response) {
                 if (response.isSuccessful() && response.body()!=null){
                     createUserLiveData.postValue(response.body());
                 }
@@ -47,7 +47,7 @@ public class PostViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<PostResponse> call, Throwable t) {
+            public void onFailure(Call<MostLikedResponse> call, Throwable t) {
                 Log.e(TAG,"onfailure :"+ t.getMessage());
                 createUserLiveData.postValue(null);
             }

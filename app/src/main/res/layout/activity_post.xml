@@ -9,9 +9,9 @@
     android:layout_height="match_parent"
     tools:context=".activites.PostActivity">
         <ImageView
+            android:id="@+id/postimage"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:background="@drawable/image"/>
+            android:layout_height="270dp"/>
 
         <TextView
             android:id="@+id/org"

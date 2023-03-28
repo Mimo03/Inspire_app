@@ -5,6 +5,7 @@ import com.example.inspire_app.responsemodels.DeleteLikedResponse;
 import com.example.inspire_app.responsemodels.GetDetailsResponse;
 import com.example.inspire_app.responsemodels.GetLikedResponse;
 import com.example.inspire_app.responsemodels.LoginResponse;
+import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.responsemodels.PostLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
 
@@ -22,8 +23,8 @@ public interface ApiInterface {
     @GET("/get/{moodleID}")
     Call<LoginResponse> getlogin(@Path("moodleID")String moodleID);
 
-    @GET("/postget")
-    Call<PostResponse> getnewpost(@Header("Authorization") String Token);
+    @GET("/postget/{category}")
+    Call<PostResponse> getnewpost(@Header("Authorization") String Token,@Path("category")String category);
 
     @GET("/getliked/{user}")
     Call<GetLikedResponse> getliked(@Header("Authorization") String Token,@Path("user")String user);
@@ -31,9 +32,14 @@ public interface ApiInterface {
     @GET("/getdetails/{id}")
     Call<GetDetailsResponse> getdetails(@Header("Authorization") String Token, @Path("id")String _id);
 
+    @GET("/getliked")
+    Call<MostLikedResponse> getmostliked(@Header("Authorization") String Token);
+
     @POST("/likedpost")
     Call<PostLikedResponse> postliked(@Header("Authorization") String Token, @Body PostLikedData postLikedData);
 
     @DELETE("/likedpost/delete/{id}")
     Call<DeleteLikedResponse> deleteliked(@Header("Authorization") String Token, @Path("id")String _id);
 }
+
+

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.inspire_app.R;
@@ -19,6 +20,7 @@ import com.example.inspire_app.responsemodels.PostResponse;
 import com.example.inspire_app.viewmodels.GetDetailsViewModel;
 import com.example.inspire_app.viewmodels.PostViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class PostActivity extends AppCompatActivity {
     List<DetailsModel> data = new ArrayList<>();
     TextView org,content;
     MaterialButton category;
+    ImageView postimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class PostActivity extends AppCompatActivity {
         org = findViewById(R.id.org);
         content = findViewById(R.id.details);
         category = findViewById(R.id.categorybtn);
+        postimage = findViewById(id.postimage);
 
         viewModel=new ViewModelProvider(PostActivity.this).get(GetDetailsViewModel.class);
         viewModel.btndetails(this.getApplication(),_id);
@@ -55,6 +59,7 @@ public class PostActivity extends AppCompatActivity {
                 org.setText(getDetailsResponse.getData().get(0).getOrganization());
                 content.setText(getDetailsResponse.getData().get(0).getContent());
                 category.setText(getDetailsResponse.getData().get(0).getCategory());
+                Picasso.with(PostActivity.this).load("http://192.168.10.146:3000" + getDetailsResponse.getData().get(0).getImageurl()).into(postimage);
 
 
 

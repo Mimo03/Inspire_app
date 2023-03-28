@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,19 +27,28 @@ import com.example.inspire_app.activites.MainActivity;
 import com.example.inspire_app.activites.PostActivity;
 import com.example.inspire_app.adapters.HorzRecyclerAdapter;
 import com.example.inspire_app.adapters.PostRecyclerAdapter;
+import com.example.inspire_app.interfaces.Horzonclickrecycler;
 import com.example.inspire_app.interfaces.LikedOnclickrecycler;
 import com.example.inspire_app.interfaces.Postonclickrecyclerview;
+import com.example.inspire_app.models.DetailsModel;
+import com.example.inspire_app.models.MostLikedData;
 import com.example.inspire_app.models.PostData;
 import com.example.inspire_app.models.PostLikedData;
+import com.example.inspire_app.responsemodels.GetDetailsResponse;
 import com.example.inspire_app.responsemodels.GetLikedResponse;
 import com.example.inspire_app.responsemodels.LoginResponse;
+import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.responsemodels.PostLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
 import com.example.inspire_app.utils.LoginManager;
+import com.example.inspire_app.viewmodels.GetDetailsViewModel;
 import com.example.inspire_app.viewmodels.LikedPostViewModel;
 import com.example.inspire_app.viewmodels.LoginViewModel;
+import com.example.inspire_app.viewmodels.MostLikedViewModel;
 import com.example.inspire_app.viewmodels.PostViewModel;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,13 +70,23 @@ public class HomeFragment extends Fragment {
     Party party;
     String name;
     TextView nametext;
+    MaterialCardView hotpickcard;
     MaterialCardView cardView;
     KonfettiView konfettiView;
     LoginManager loginManager;
     PostRecyclerAdapter recyclerAdapter;
     PostViewModel viewModel;
     List<PostData> data = new ArrayList<>();
+    List<MostLikedData> mostLikedData = new ArrayList<>();
+    List<String> stringList = new ArrayList<>();
+    List<DetailsModel> detailsModels = new ArrayList<>();
     LikedPostViewModel likedPostViewModel;
+    MostLikedViewModel mostLikedViewModel;
+    TextView title,likes,content;
+    MaterialButton category;
+    LinearLayout linearLayout;
+    ImageView hotpickimage;
+    GetDetailsViewModel getDetailsViewModel;
 
 
     public HomeFragment() {
@@ -108,12 +129,120 @@ public class HomeFragment extends Fragment {
         loginManager = new LoginManager(getContext());
 //        Bundle bundle = getArguments();
 //        name = bundle.getString("name");
+        stringList.add("All");
+        stringList.add("Startup");
+        stringList.add("Internship");
+        stringList.add("Hackathon");
+        stringList.add("Achievement");
+        stringList.add("Event Winners");
+
+
+        hotpickcard = view.findViewById(R.id.hotpickscard);
+        hotpickcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostLikedViewModel=new ViewModelProvider(HomeFragment.this).get(MostLikedViewModel.class);
+                mostLikedViewModel.btnmostliked(getActivity().getApplication());
+                mostLikedViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<MostLikedResponse>() {
+                    @Override
+                    public void onChanged(MostLikedResponse mostLikedResponse) {
+                        try {
+                            if (mostLikedResponse.getData() == null) {
+//
+                                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                likes = view.findViewById(R.id.hotpick_likes);
+
+                                mostLikedData = mostLikedResponse.getData();
+                                likes.setText(mostLikedData.get(0).getCount() + " likes");
+                                getDetailsViewModel = new ViewModelProvider(HomeFragment.this).get(GetDetailsViewModel.class);
+                                getDetailsViewModel.btndetails(getActivity().getApplication(), mostLikedData.get(0).get_id());
+                                getDetailsViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<GetDetailsResponse>() {
+                                    @Override
+                                    public void onChanged(GetDetailsResponse getDetailsResponse) {
+                                        title = view.findViewById(R.id.hotpick_title);
+                                        content = view.findViewById(R.id.hotpick_content);
+                                        category = view.findViewById(R.id.categorybtn);
+                                        linearLayout = view.findViewById(R.id.hotpick_details);
+                                        hotpickimage = view.findViewById(R.id.hotpick_img);
+
+                                        detailsModels = getDetailsResponse.getData();
+                                        title.setText(detailsModels.get(0).getOrganization());
+                                        content.setText(detailsModels.get(0).getContent());
+                                        category.setText("# " + detailsModels.get(0).getCategory());
+                                        Picasso.with(getContext()).load("http://192.168.10.146:3000" + detailsModels.get(0).getImageurl()).into(hotpickimage);
+
+                                        linearLayout.setVisibility(View.VISIBLE);
+                                        hotpickcard.setClickable(false);
+
+                                    }
+                                });
+                            }
+                        }catch (Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+
+                            }
+
+                });
+
+            }
+        });
+
 
         nametext = view.findViewById(R.id.nametext);
         nametext.setText(loginManager.getname());
 
+        recyclerView = view.findViewById(R.id.horizontalscroll);
+        adapter = new HorzRecyclerAdapter(getContext(), stringList, new Horzonclickrecycler() {
+            @Override
+            public void onclick(String category) {
+                Toast.makeText(getContext(), "clicked",Toast.LENGTH_SHORT).show();
+                viewModel.btnnewpost(getActivity().getApplication(),category);
+                viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
+                    @Override
+                    public void onChanged(PostResponse postResponse) {
+                        data = postResponse.getData();
+                        postrecycler = view.findViewById(R.id.postrecyclerview);
+                        recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
+                            @Override
+                            public void onclick(String id) {
+                                Intent i = new Intent(getContext(), PostActivity.class);
+                                i.putExtra("id", id);
+                                startActivity(i);
+
+                            }
+                        }, new LikedOnclickrecycler() {
+                            @Override
+                            public void onclick(String id, String category, String org, String image) {
+                                Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG).show();
+                                btnpostclicked(id, category, org, image);
+//                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
+//                        imageButton.setClickable(false);
+//                        imageButton.setBackgroundColor(Color.RED);
+
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+                        postrecycler.setAdapter(recyclerAdapter);
+                        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
+                        postrecycler.setLayoutManager(linearLayoutManager1);
+
+                    }
+                });
+
+
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
         viewModel=new ViewModelProvider(HomeFragment.this).get(PostViewModel.class);
-        viewModel.btnnewpost(getActivity().getApplication());
+        viewModel.btnnewpost(getActivity().getApplication(),"All");
         viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
             @Override
             public void onChanged(PostResponse postResponse) {
@@ -122,57 +251,54 @@ public class HomeFragment extends Fragment {
                 recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
                     @Override
                     public void onclick(String id) {
-                        Intent i = new Intent(getContext(),PostActivity.class);
-                        i.putExtra("id",id);
+                        Intent i = new Intent(getContext(), PostActivity.class);
+                        i.putExtra("id", id);
                         startActivity(i);
 
                     }
                 }, new LikedOnclickrecycler() {
                     @Override
                     public void onclick(String id, String category, String org, String image) {
-                        Toast.makeText(getContext(),"clicked",Toast.LENGTH_LONG).show();
-                        btnpostclicked(id,category,org,image);
+                        Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG).show();
+                        btnpostclicked(id, category, org, image);
 //                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
 //                        imageButton.setClickable(false);
 //                        imageButton.setBackgroundColor(Color.RED);
 
                     }
                 });
-                        postrecycler.setAdapter(recyclerAdapter);
+                adapter.notifyDataSetChanged();
+                postrecycler.setAdapter(recyclerAdapter);
                 LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
                 postrecycler.setLayoutManager(linearLayoutManager1);
+
+                    }
+                });
+
+                return view;
             }
-        });
 
-        recyclerView = view.findViewById(R.id.horizontalscroll);
-        adapter = new HorzRecyclerAdapter(this.getContext());
-        recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+            private void btnpostclicked(String id, String category, String org, String image) {
 
-        return view;
-    }
-    private void btnpostclicked (String id,String category,String org,String image){
+                PostLikedData data = new PostLikedData(loginManager.getid(), id);
+                initViewModel();
+                likedPostViewModel.btnpost(getActivity().getApplication(), data);
+            }
 
-        PostLikedData data = new PostLikedData(loginManager.getid(), id);
-        initViewModel();
-        likedPostViewModel.btnpost(this.getActivity().getApplication(),data);
-    }
-
-    private void initViewModel () {
-        likedPostViewModel = new ViewModelProvider(this).get(LikedPostViewModel.class);
-        likedPostViewModel.getCreateUserLiveData2().observe(this, new Observer<PostLikedResponse>() {
-            @Override
-            public void onChanged(PostLikedResponse postLikedResponse) {
-                if (postLikedResponse == null) {
-                    Toast.makeText(HomeFragment.this.getContext(),"Failed",Toast.LENGTH_SHORT).show();
+            private void initViewModel() {
+                likedPostViewModel = new ViewModelProvider(getActivity()).get(LikedPostViewModel.class);
+                likedPostViewModel.getCreateUserLiveData2().observe(getActivity(), new Observer<PostLikedResponse>() {
+                    @Override
+                    public void onChanged(PostLikedResponse postLikedResponse) {
+                        if (postLikedResponse == null) {
+                            Toast.makeText(HomeFragment.this.getContext(), "Failed", Toast.LENGTH_SHORT).show();
 //                    error.setText("Please enter correct OTP");
-                } else {
-                    Toast.makeText(HomeFragment.this.getContext(), postLikedResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HomeFragment.this.getContext(), postLikedResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
+                        }
 
-                }
-        });
-        }
+                    }
+                });
+            }
     }

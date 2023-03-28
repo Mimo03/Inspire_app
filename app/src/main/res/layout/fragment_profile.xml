@@ -122,6 +122,7 @@
                 android:textColor="?android:attr/textColor" />
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
+                android:id="@+id/sharebtn"
                 android:text="Share"
                 android:textAllCaps="false"
                 app:cornerRadius="37dp"
