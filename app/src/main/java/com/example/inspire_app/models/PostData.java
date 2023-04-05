@@ -1,6 +1,9 @@
 package com.example.inspire_app.models;
 
+import java.util.List;
+
 public class PostData {
+    private List<String> allcomment;
     private String _id;
     private String category;
     private String content;
@@ -8,8 +11,10 @@ public class PostData {
     private String socialmedia;
     private String imageurl;
     private int __v;
+    private Boolean comments;
 
-    public PostData(String _id, String category, String content, String organization, String socialmedia, String imageurl, int __v) {
+    public PostData(List<String> allcomment, String _id, String category, String content, String organization, String socialmedia, String imageurl, int __v, Boolean comments) {
+        this.allcomment = allcomment;
         this._id = _id;
         this.category = category;
         this.content = content;
@@ -17,6 +22,15 @@ public class PostData {
         this.socialmedia = socialmedia;
         this.imageurl = imageurl;
         this.__v = __v;
+        this.comments = comments;
+    }
+
+    public List<String> getAllcomment() {
+        return allcomment;
+    }
+
+    public void setAllcomment(List<String> allcomment) {
+        this.allcomment = allcomment;
     }
 
     public String get_id() {
@@ -73,5 +87,13 @@ public class PostData {
 
     public void set__v(int __v) {
         this.__v = __v;
+    }
+
+    public Boolean getComments() {
+        return comments;
+    }
+
+    public void setComments(Boolean comments) {
+        this.comments = comments;
     }
 }

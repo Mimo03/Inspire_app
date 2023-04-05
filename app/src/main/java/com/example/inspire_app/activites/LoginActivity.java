@@ -63,26 +63,37 @@ public class LoginActivity extends AppCompatActivity {
                     viewModel.getCreateUserLiveData().observe(LoginActivity.this, new Observer<LoginResponse>() {
                         @Override
                         public void onChanged(LoginResponse loginResponse) {
-                            data = loginResponse.getData();
-                                token = loginResponse.getToken();
-                                name = loginResponse.getData().get(0).getName();
-                                moodle = loginResponse.getData().get(0).getMoodleID();
-                                id = loginResponse.getData().get(0).get_id();
-                                apipass = loginResponse.getData().get(0).getPassword();
-                                if(apipass.equals(password2)){
-                                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                                    i.putExtra("name",name);
-                                    startActivity(i);
-                                    loginManager.setname(name);
-                                    loginManager.setMoodleid(moodle);
-                                    loginManager.settoken(token);
-                                    loginManager.setid(id);
-                                    loginManager.SetLoginStatus(true);
+                            try {
+                                if (loginResponse.getData() == null) {
+//
+                                    Toast.makeText(LoginActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                                } else {
+
+                                    data = loginResponse.getData();
+                                    token = loginResponse.getToken();
+                                    name = loginResponse.getData().get(0).getName();
+                                    moodle = loginResponse.getData().get(0).getMoodleID();
+                                    id = loginResponse.getData().get(0).get_id();
+                                    apipass = loginResponse.getData().get(0).getPassword();
+                                    if (apipass.equals(password2)) {
+                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        i.putExtra("name", name);
+                                        startActivity(i);
+                                        loginManager.setname(name);
+                                        loginManager.setMoodleid(moodle);
+                                        loginManager.settoken(token);
+                                        loginManager.setid(id);
+                                        loginManager.SetLoginStatus(true);
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                                else{
-                                    Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_LONG).show();
-                                }
+                            }catch (Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
 
                             }
 

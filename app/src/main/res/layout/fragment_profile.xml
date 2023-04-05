@@ -54,8 +54,9 @@
         android:textColor="?android:attr/textColor"
         android:gravity="center_horizontal"/>
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/editbtn"
         android:layout_width="wrap_content"
-        android:text="Edit profile"
+        android:text="Edit profile pic"
         android:textAllCaps="false"
         app:cornerRadius="37dp"
         android:layout_gravity="center_horizontal"

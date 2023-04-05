@@ -132,6 +132,59 @@
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
                 android:textColor="?android:attr/textColor"
                 android:textSize="15dp" />
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Comments"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <LinearLayout
+                android:id="@+id/comment_section"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:visibility="gone"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    app:hintEnabled="false"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:hint="Type comment here"
+                        android:layout_weight="1"
+                        android:id="@+id/comment_input"
+                        android:visibility="visible"
+                        android:paddingVertical="10dp"
+                        android:gravity="center_vertical"
+                        android:textColor="#616161"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/purple_200"
+                    app:cornerRadius="15dp"/>
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 

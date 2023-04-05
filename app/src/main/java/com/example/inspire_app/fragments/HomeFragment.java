@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,16 @@ import com.example.inspire_app.activites.MainActivity;
 import com.example.inspire_app.activites.PostActivity;
 import com.example.inspire_app.adapters.HorzRecyclerAdapter;
 import com.example.inspire_app.adapters.PostRecyclerAdapter;
+import com.example.inspire_app.interfaces.Commentonclickrecycler;
 import com.example.inspire_app.interfaces.Horzonclickrecycler;
 import com.example.inspire_app.interfaces.LikedOnclickrecycler;
 import com.example.inspire_app.interfaces.Postonclickrecyclerview;
+import com.example.inspire_app.models.CommentData;
 import com.example.inspire_app.models.DetailsModel;
 import com.example.inspire_app.models.MostLikedData;
 import com.example.inspire_app.models.PostData;
 import com.example.inspire_app.models.PostLikedData;
+import com.example.inspire_app.responsemodels.CommentResponse;
 import com.example.inspire_app.responsemodels.GetDetailsResponse;
 import com.example.inspire_app.responsemodels.GetLikedResponse;
 import com.example.inspire_app.responsemodels.LoginResponse;
@@ -41,6 +45,7 @@ import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.responsemodels.PostLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
 import com.example.inspire_app.utils.LoginManager;
+import com.example.inspire_app.viewmodels.CommentViewModel;
 import com.example.inspire_app.viewmodels.GetDetailsViewModel;
 import com.example.inspire_app.viewmodels.LikedPostViewModel;
 import com.example.inspire_app.viewmodels.LoginViewModel;
@@ -69,6 +74,7 @@ public class HomeFragment extends Fragment {
     RecyclerView postrecycler;
     Party party;
     String name;
+    Boolean check = false;
     TextView nametext;
     MaterialCardView hotpickcard;
     MaterialCardView cardView;
@@ -87,6 +93,8 @@ public class HomeFragment extends Fragment {
     LinearLayout linearLayout;
     ImageView hotpickimage;
     GetDetailsViewModel getDetailsViewModel;
+    TextView textView;
+    CommentViewModel commentViewModel;
 
 
     public HomeFragment() {
@@ -135,9 +143,24 @@ public class HomeFragment extends Fragment {
         stringList.add("Hackathon");
         stringList.add("Achievement");
         stringList.add("Event Winners");
-
-
         hotpickcard = view.findViewById(R.id.hotpickscard);
+
+        textView = view.findViewById(R.id.comment_text);
+
+
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hotpickcard.setVisibility(View.VISIBLE);
+
+
+            }
+        }, 10000);
+
+
         hotpickcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,6 +227,70 @@ public class HomeFragment extends Fragment {
                 viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
                     @Override
                     public void onChanged(PostResponse postResponse) {
+                        try {
+                            if (postResponse.getData() == null) {
+//
+                                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                data = postResponse.getData();
+                                postrecycler = view.findViewById(R.id.postrecyclerview);
+                                recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
+                                    @Override
+                                    public void onclick(String id) {
+                                        Intent i = new Intent(getContext(), PostActivity.class);
+                                        i.putExtra("id", id);
+                                        startActivity(i);
+
+                                    }
+                                }, new LikedOnclickrecycler() {
+                                    @Override
+                                    public void onclick(String id, String category, String org, String image) {
+                                        Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG).show();
+                                        btnpostclicked(id, category, org, image);
+//                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
+//                        imageButton.setClickable(false);
+//                        imageButton.setBackgroundColor(Color.RED);
+
+                                    }
+                                }, new Commentonclickrecycler() {
+                                    @Override
+                                    public void onclick(String comment,String id) {
+                                        btncomment(comment,id);
+
+                                    }
+                                });
+                                adapter.notifyDataSetChanged();
+                                postrecycler.setAdapter(recyclerAdapter);
+                                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
+                                postrecycler.setLayoutManager(linearLayoutManager1);
+                            }
+                        }catch (Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
+        viewModel=new ViewModelProvider(HomeFragment.this).get(PostViewModel.class);
+        viewModel.btnnewpost(getActivity().getApplication(),"All");
+        viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
+            @Override
+            public void onChanged(PostResponse postResponse) {
+                try {
+                    if (postResponse.getData() == null) {
+                        Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
                         data = postResponse.getData();
                         postrecycler = view.findViewById(R.id.postrecyclerview);
                         recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
@@ -224,53 +311,21 @@ public class HomeFragment extends Fragment {
 //                        imageButton.setBackgroundColor(Color.RED);
 
                             }
+                        }, new Commentonclickrecycler() {
+                            @Override
+                            public void onclick(String comment,String id) {
+                                btncomment(comment,id);
+                            }
                         });
                         adapter.notifyDataSetChanged();
                         postrecycler.setAdapter(recyclerAdapter);
                         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
                         postrecycler.setLayoutManager(linearLayoutManager1);
-
                     }
-                });
+                }catch (Exception e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
-
-            }
-        });
-        recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-
-        viewModel=new ViewModelProvider(HomeFragment.this).get(PostViewModel.class);
-        viewModel.btnnewpost(getActivity().getApplication(),"All");
-        viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
-            @Override
-            public void onChanged(PostResponse postResponse) {
-                data = postResponse.getData();
-                postrecycler = view.findViewById(R.id.postrecyclerview);
-                recyclerAdapter = new PostRecyclerAdapter(getContext(), data, new Postonclickrecyclerview() {
-                    @Override
-                    public void onclick(String id) {
-                        Intent i = new Intent(getContext(), PostActivity.class);
-                        i.putExtra("id", id);
-                        startActivity(i);
-
-                    }
-                }, new LikedOnclickrecycler() {
-                    @Override
-                    public void onclick(String id, String category, String org, String image) {
-                        Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG).show();
-                        btnpostclicked(id, category, org, image);
-//                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
-//                        imageButton.setClickable(false);
-//                        imageButton.setBackgroundColor(Color.RED);
-
-                    }
-                });
-                adapter.notifyDataSetChanged();
-                postrecycler.setAdapter(recyclerAdapter);
-                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
-                postrecycler.setLayoutManager(linearLayoutManager1);
 
                     }
                 });
@@ -301,4 +356,27 @@ public class HomeFragment extends Fragment {
                     }
                 });
             }
+    private void btncomment(String comment,String id) {
+
+        CommentData data = new CommentData(id,comment);
+        initViewModel2();
+        commentViewModel.btncomment(getActivity().getApplication(), data);
+    }
+
+    private void initViewModel2() {
+        commentViewModel = new ViewModelProvider(getActivity()).get(CommentViewModel.class);
+        commentViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<CommentResponse>() {
+            @Override
+            public void onChanged(CommentResponse commentResponse) {
+                if (commentResponse == null) {
+                    Toast.makeText(HomeFragment.this.getContext(), "Failed", Toast.LENGTH_SHORT).show();
+//                    error.setText("Please enter correct OTP");
+                } else {
+                    Toast.makeText(HomeFragment.this.getContext(), commentResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+    }
     }

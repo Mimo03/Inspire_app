@@ -8,102 +8,169 @@
     android:layout_marginBottom="10dp"
     android:layout_height="match_parent"
     tools:context=".activites.PostActivity">
-        <ImageView
-            android:id="@+id/postimage"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"/>
-
-        <TextView
-            android:id="@+id/org"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JVSH Technology"
-            android:textSize="18sp"
-            android:textColor="?android:attr/textColor"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="7dp"/>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/categorybtn"
-        android:layout_width="wrap_content"
-        android:text="# startup"
-        android:textAllCaps="false"
-        app:cornerRadius="37dp"
-        android:layout_marginStart="10dp"
-        android:paddingVertical="10dp"
-        android:backgroundTint="#BC62FF"
-        android:paddingHorizontal="20dp"
-        android:layout_height="wrap_content"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginEnd="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:backgroundTint="?android:attr/textColor"
-                    android:background="@drawable/ic_icon_material_favorite"
-                    android:layout_gravity="center"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:background="@drawable/ic_group_747"
-                    android:backgroundTint="?android:attr/textColor"
-                    android:layout_gravity="center"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:backgroundTint="?android:attr/textColor"
-                    android:background="@drawable/ic_icon_feather_send"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_alignParentRight="true"
-                android:backgroundTint="?android:attr/textColor"
-                android:background="@drawable/ic_icon_feather_share_2"
-                android:layout_gravity="center"/>
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/textview4"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20,253 likes"
-            android:textStyle="bold"
-            android:textColor="?android:attr/textColor"
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/details"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-            android:textColor="?android:attr/textColor"
-            android:textSize="15sp" />
-    <View
-        android:id="@+id/view2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#30707070"
-        android:layout_marginVertical="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_header_container" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/postimage"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"/>
+
+            <TextView
+                android:id="@+id/org"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JVSH Technology"
+                android:textSize="18sp"
+                android:textColor="?android:attr/textColor"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/categorybtn"
+                android:layout_width="wrap_content"
+                android:text="# startup"
+                android:textAllCaps="false"
+                app:cornerRadius="37dp"
+                android:layout_marginStart="10dp"
+                android:paddingVertical="10dp"
+                android:backgroundTint="#BC62FF"
+                android:paddingHorizontal="20dp"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="?android:attr/textColor"
+                        android:background="@drawable/ic_icon_material_favorite"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/ic_group_747"
+                        android:backgroundTint="?android:attr/textColor"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:backgroundTint="?android:attr/textColor"
+                        android:background="@drawable/ic_icon_feather_send"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="?android:attr/textColor"
+                    android:background="@drawable/ic_icon_feather_share_2"
+                    android:layout_gravity="center"/>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/textview4"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20,253 likes"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColor"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/details"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                android:textColor="?android:attr/textColor"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Comments"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <LinearLayout
+                android:id="@+id/comment_section"
+                android:layout_width="match_parent"
+                android:weightSum="2"
+                android:visibility="gone"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    app:hintEnabled="false"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:hint="Type comment here"
+                        android:layout_weight="1"
+                        android:id="@+id/comment_input"
+                        android:visibility="visible"
+                        android:paddingVertical="10dp"
+                        android:gravity="center_vertical"
+                        android:textColor="#616161"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/purple_200"
+                    app:cornerRadius="15dp"/>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#30707070"
+                android:layout_marginVertical="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_header_container" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/comment_recycler"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 
     </LinearLayout>
 

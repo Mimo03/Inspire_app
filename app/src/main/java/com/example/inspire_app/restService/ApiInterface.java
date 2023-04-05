@@ -1,6 +1,9 @@
 package com.example.inspire_app.restService;
 
+import com.example.inspire_app.models.CommentData;
 import com.example.inspire_app.models.PostLikedData;
+import com.example.inspire_app.models.ProfilePicData;
+import com.example.inspire_app.responsemodels.CommentResponse;
 import com.example.inspire_app.responsemodels.DeleteLikedResponse;
 import com.example.inspire_app.responsemodels.GetDetailsResponse;
 import com.example.inspire_app.responsemodels.GetLikedResponse;
@@ -8,6 +11,7 @@ import com.example.inspire_app.responsemodels.LoginResponse;
 import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.responsemodels.PostLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
+import com.example.inspire_app.responsemodels.ProfilePicResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,14 +36,25 @@ public interface ApiInterface {
     @GET("/getdetails/{id}")
     Call<GetDetailsResponse> getdetails(@Header("Authorization") String Token, @Path("id")String _id);
 
+//    @GET("/getpic/{user}")
+//    Call<GetDetailsResponse> getdetails(@Header("Authorization") String Token, @Path("id")String _id);
+
     @GET("/getliked")
     Call<MostLikedResponse> getmostliked(@Header("Authorization") String Token);
 
     @POST("/likedpost")
     Call<PostLikedResponse> postliked(@Header("Authorization") String Token, @Body PostLikedData postLikedData);
 
+    @POST("/commentpost")
+    Call<CommentResponse> postcomment(@Header("Authorization") String Token, @Body CommentData commentData);
+
+    @POST("/userpic")
+    Call<ProfilePicResponse> postprofile(@Header("Authorization") String Token, @Body ProfilePicData profilePicData);
+
     @DELETE("/likedpost/delete/{id}")
     Call<DeleteLikedResponse> deleteliked(@Header("Authorization") String Token, @Path("id")String _id);
+
+
 }
 
 

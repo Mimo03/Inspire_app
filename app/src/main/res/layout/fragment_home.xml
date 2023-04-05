@@ -39,6 +39,7 @@
                 android:layout_marginVertical="10dp"
                 android:id="@+id/hotpickscard"
                 app:strokeWidth="3dp"
+                android:visibility="gone"
                 app:strokeColor="@color/purple_500"
                 android:layout_marginHorizontal="15dp"
                 android:layout_width="match_parent"
