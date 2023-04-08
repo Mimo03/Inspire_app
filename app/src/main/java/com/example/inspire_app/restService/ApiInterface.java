@@ -27,8 +27,8 @@ public interface ApiInterface {
     @GET("/get/{moodleID}")
     Call<LoginResponse> getlogin(@Path("moodleID")String moodleID);
 
-    @GET("/postget/{category}")
-    Call<PostResponse> getnewpost(@Header("Authorization") String Token,@Path("category")String category);
+    @GET("/postget/{category}/{cd}")
+    Call<PostResponse> getnewpost(@Header("Authorization") String Token,@Path("category")String category,@Path("cd")String cd);
 
     @GET("/getliked/{user}")
     Call<GetLikedResponse> getliked(@Header("Authorization") String Token,@Path("user")String user);

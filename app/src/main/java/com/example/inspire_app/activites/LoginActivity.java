@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                     apipass = loginResponse.getData().get(0).getPassword();
                                     if (apipass.equals(password2)) {
                                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent i = new Intent(LoginActivity.this, ChooseCategoryActivity.class);
                                         i.putExtra("name", name);
                                         startActivity(i);
                                         loginManager.setname(name);
