@@ -24,6 +24,7 @@ import com.example.inspire_app.adapters.PostRecyclerAdapter;
 import com.example.inspire_app.fragments.HomeFragment;
 import com.example.inspire_app.fragments.LikeProfile;
 import com.example.inspire_app.fragments.ProfileFragment;
+import com.example.inspire_app.utils.LoginManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView btnView;
     Switch btnswitch;
     ImageView bellicon;
-    String name;
+    String name,category;
+    LoginManager loginManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         name = i.getStringExtra("name");
+        category = i.getStringExtra("category");
+
+        loginManager = new LoginManager(this);
+
+
 
 
 

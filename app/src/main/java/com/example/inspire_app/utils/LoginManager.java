@@ -34,6 +34,8 @@ public class LoginManager {
 
     private static String token = "token";
 
+    private static String category = "category";
+
     public static LoginManager getInstance() {
 
         if (Instance == null) {
@@ -92,12 +94,12 @@ public class LoginManager {
 
     }
 
-    public void setPassword(String pass) {
-        editor.putString(password, pass).commit();
+    public void setcount(int pass) {
+        editor.putInt(password, pass).commit();
     }
 
-    public String getPassword() {
-        return sharedPreferences.getString(password, "");
+    public int getcount() {
+        return sharedPreferences.getInt(password,15);
 
     }
 
@@ -107,6 +109,14 @@ public class LoginManager {
 
     public String gettoken() {
         return sharedPreferences.getString(token, "");
+    }
+
+    public void setCategory(String tok) {
+        editor.putString(category, tok).apply();
+    }
+
+    public String getCategory() {
+        return sharedPreferences.getString(category, "Startup");
     }
 
     public void setFirebase_token(String token) {

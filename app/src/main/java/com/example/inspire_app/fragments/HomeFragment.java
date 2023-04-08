@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
     GetDetailsViewModel getDetailsViewModel;
     TextView textView;
     CommentViewModel commentViewModel;
+    List<String> datalist = new ArrayList<>();
 
 
     public HomeFragment() {
@@ -179,6 +180,7 @@ public class HomeFragment extends Fragment {
 
                                 mostLikedData = mostLikedResponse.getData();
                                 likes.setText(mostLikedData.get(0).getCount() + " likes");
+
                                 getDetailsViewModel = new ViewModelProvider(HomeFragment.this).get(GetDetailsViewModel.class);
                                 getDetailsViewModel.btndetails(getActivity().getApplication(), mostLikedData.get(0).get_id());
                                 getDetailsViewModel.getCreateUserLiveData().observe(getActivity(), new Observer<GetDetailsResponse>() {
@@ -209,7 +211,12 @@ public class HomeFragment extends Fragment {
 
                             }
 
+
                 });
+//                for(int i=0;i<mostLikedData.size();i++){
+//                    datalist.add(mostLikedData.get(i).getMostpost().get(0).getCategory());
+//
+//                }
 
             }
         });
@@ -217,13 +224,14 @@ public class HomeFragment extends Fragment {
 
         nametext = view.findViewById(R.id.nametext);
         nametext.setText(loginManager.getname());
+//        Toast.makeText(getContext(), datalist.get(0), Toast.LENGTH_SHORT).show();
 
         recyclerView = view.findViewById(R.id.horizontalscroll);
         adapter = new HorzRecyclerAdapter(getContext(), stringList, new Horzonclickrecycler() {
             @Override
             public void onclick(String category) {
                 Toast.makeText(getContext(), "clicked",Toast.LENGTH_SHORT).show();
-                viewModel.btnnewpost(getActivity().getApplication(),category);
+                viewModel.btnnewpost(getActivity().getApplication(),category, loginManager.getCategory());
                 viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
                     @Override
                     public void onChanged(PostResponse postResponse) {
@@ -281,7 +289,7 @@ public class HomeFragment extends Fragment {
 
 
         viewModel=new ViewModelProvider(HomeFragment.this).get(PostViewModel.class);
-        viewModel.btnnewpost(getActivity().getApplication(),"All");
+        viewModel.btnnewpost(getActivity().getApplication(),"All", loginManager.getCategory());
         viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
             @Override
             public void onChanged(PostResponse postResponse) {
