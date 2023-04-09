@@ -69,7 +69,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.category.setText("# " + dataList.get(position).getCategory());
         holder.content.setText(dataList.get(position).getContent());
         holder.org.setText(dataList.get(position).getOrganization());
-        Picasso.with(context).load("http://192.168.0.106:3000" + dataList.get(position).getImageurl()).into(holder.imageView);
+        Picasso.with(context).load("http://192.168.1.105:3000" + dataList.get(position).getImageurl()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

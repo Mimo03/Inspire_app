@@ -97,7 +97,7 @@ public class PostActivity extends AppCompatActivity {
                         arraylist = getDetailsResponse.getData().get(0).getAllcomment();
                         comments = getDetailsResponse.getData().get(0).getComments();
                         id = getDetailsResponse.getData().get(0).get_id();
-                        Picasso.with(PostActivity.this).load("http://192.168.0.106:3000" + getDetailsResponse.getData().get(0).getImageurl()).into(postimage);
+                        Picasso.with(PostActivity.this).load("http://192.168.1.105:3000" + getDetailsResponse.getData().get(0).getImageurl()).into(postimage);
 
                     }
                 }catch (Exception e) {
