@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                         loginManager.setMoodleid(moodle);
                                         loginManager.settoken(token);
                                         loginManager.setid(id);
+                                        loginManager.setPassword(apipass);
                                         loginManager.SetLoginStatus(true);
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();

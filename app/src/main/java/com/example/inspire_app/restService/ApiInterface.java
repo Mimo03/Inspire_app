@@ -1,8 +1,10 @@
 package com.example.inspire_app.restService;
 
+import com.example.inspire_app.models.ChangePassModel;
 import com.example.inspire_app.models.CommentData;
 import com.example.inspire_app.models.PostLikedData;
 import com.example.inspire_app.models.ProfilePicData;
+import com.example.inspire_app.responsemodels.ChangePasswordResponse;
 import com.example.inspire_app.responsemodels.CommentResponse;
 import com.example.inspire_app.responsemodels.DeleteLikedResponse;
 import com.example.inspire_app.responsemodels.GetDetailsResponse;
@@ -54,6 +56,8 @@ public interface ApiInterface {
     @DELETE("/likedpost/delete/{id}")
     Call<DeleteLikedResponse> deleteliked(@Header("Authorization") String Token, @Path("id")String _id);
 
+    @POST("/password/update")
+    Call<ChangePasswordResponse> changePass(@Header("Authorization") String Token, @Body ChangePassModel changePassModel);
 
 }
 
