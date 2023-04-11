@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inspire_app.R;
+import com.example.inspire_app.activites.ChangePasswordActivity;
 import com.example.inspire_app.activites.LoginActivity;
 import com.example.inspire_app.activites.MainActivity;
 import com.example.inspire_app.activites.PostActivity;
@@ -37,7 +38,7 @@ import com.google.android.material.button.MaterialButton;
 
 
 public class ProfileFragment extends Fragment {
-    MaterialButton logoutbtn,share,editbtn;
+    MaterialButton logoutbtn,share,editbtn, changebtn;
     LoginManager loginManager;
     TextView name,moodleid;
     ImageView profilepic;
@@ -70,6 +71,7 @@ public class ProfileFragment extends Fragment {
         profilepic = view.findViewById(R.id.profile_pic);
 
         editbtn = view.findViewById(R.id.editbtn);
+        changebtn = view.findViewById(R.id.changebtn);
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +106,14 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(), SplashActivity.class));
             }
         });
+
+        changebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ChangePasswordActivity.class));
+            }
+        });
+
         return view;
     }
     private void openGallery() {

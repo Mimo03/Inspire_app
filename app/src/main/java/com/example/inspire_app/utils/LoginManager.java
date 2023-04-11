@@ -30,6 +30,7 @@ public class LoginManager {
 
     private static String username = "username";
 
+    private static String count = "count";
     private static String password = "password";
 
     private static String token = "token";
@@ -95,11 +96,20 @@ public class LoginManager {
     }
 
     public void setcount(int pass) {
-        editor.putInt(password, pass).commit();
+        editor.putInt(count, pass).commit();
     }
 
     public int getcount() {
-        return sharedPreferences.getInt(password,15);
+        return sharedPreferences.getInt(count,15);
+
+    }
+
+    public void setPassword( String pass) {
+        editor.putString(password, pass).commit();
+    }
+
+    public String getPassword() {
+        return sharedPreferences.getString(password,"");
 
     }
 

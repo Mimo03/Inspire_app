@@ -17,6 +17,7 @@ import com.example.inspire_app.models.LoginData;
 import com.example.inspire_app.responsemodels.LoginResponse;
 import com.example.inspire_app.utils.LoginManager;
 import com.example.inspire_app.viewmodels.LoginViewModel;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     List<LoginData> data = new ArrayList<>();
     String token;
     String apipass;
+    TextInputLayout textInputLayoutMoodleId;
+    TextInputLayout textInputLayoutPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-
+        textInputLayoutMoodleId = findViewById(R.id.text_input_layout_moodleId);
+        textInputLayoutPassword = findViewById(R.id.text_input_layout_password);
         loginManager = new LoginManager(this);
         loginButton = findViewById(R.id.loginButton);
 
@@ -52,10 +56,10 @@ public class LoginActivity extends AppCompatActivity {
                 moodleid = username.getText().toString();
                 password2 = password.getText().toString();
                 if (moodleid.isEmpty()) {
-                    username.setError("Enter Moodle Id");
+                    textInputLayoutMoodleId.setError("Enter Moodle Id");
                 }
                 if (password2.isEmpty()) {
-                    password.setError("Enter Password");
+                    textInputLayoutPassword.setError("Enter Password");
                 }
                 else{
                     viewModel=new ViewModelProvider(LoginActivity.this).get(LoginViewModel.class);
@@ -85,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                         loginManager.setMoodleid(moodle);
                                         loginManager.settoken(token);
                                         loginManager.setid(id);
+                                        loginManager.setPassword(apipass);
                                         loginManager.SetLoginStatus(true);
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();

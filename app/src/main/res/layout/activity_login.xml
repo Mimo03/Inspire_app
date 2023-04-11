@@ -34,41 +34,77 @@
                     android:textSize="28dp"
                     android:textStyle="bold" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_moodleId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Moodle Id"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:boxStrokeColor="@color/purple_200"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    android:selectAllOnFocus="true"
+                    app:errorEnabled="true"
+                    app:boxStrokeErrorColor="@color/purple_200"
+                    app:errorIconDrawable="@null"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
                 <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableLeft="@drawable/ic_baseline_person_24"
+                    android:drawableTint="@color/purple_200"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
                     android:drawablePadding="10dp"
-                    android:hint="Moodle Id"
                     android:padding="10dp"
-                    android:selectAllOnFocus="true"
-                    android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background" />
 
-                <EditText
-                    android:id="@+id/password"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_password"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableLeft="@drawable/ic_baseline_lock_24"
-                    android:drawablePadding="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background" />
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:boxStrokeColor="@color/purple_200"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp"
+                    app:boxCornerRadiusTopStart="20dp"
+                    android:selectAllOnFocus="true"
+                    app:errorEnabled="true"
+                    app:boxStrokeErrorColor="@color/purple_200"
+                    app:errorIconDrawable="@null"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/purple_200">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:drawableStart="@drawable/ic_baseline_lock_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/purple_200"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:textColorHighlight="@color/cardview_dark_background" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/loginButton"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/button_status"
-                    android:backgroundTint="@color/purple_200"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:color="@drawable/button_status"
                     android:text="login"
                     android:textColor="@color/white"
                     android:textSize="18sp"
