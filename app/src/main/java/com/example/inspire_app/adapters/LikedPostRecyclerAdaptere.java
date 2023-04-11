@@ -50,7 +50,7 @@ public class LikedPostRecyclerAdaptere extends RecyclerView.Adapter<LikedPostRec
                 postonclickrecyclerview.onclick(data.get(position).getPostid().get_id());
             }
         });
-        Picasso.with(context).load("http://192.168.0.106:3000" + data.get(position).getPostid().getImageurl()).into(holder.imageView);
+        Picasso.with(context).load("http://192.168.12.127:3000" + data.get(position).getPostid().getImageurl()).into(holder.imageView);
         holder.category.setText(data.get(position).getPostid().getOrganization() + " #"+data.get(position).getPostid().getCategory());
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
