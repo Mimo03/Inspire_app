@@ -39,7 +39,7 @@ public class NotificationRecyclerAdapter extends RecyclerView.Adapter<Notificati
     public void onBindViewHolder(@NonNull NotificationRecyclerAdapter.MyViewHolder holder, int position) {
         holder.content.setText(data.get(position).getOrganization());
         holder.text.setText("New Post on "+data.get(position).getCategory()+" added");
-        Picasso.with(context.getApplicationContext()).load("http://192.168.1.105:3000" + data.get(0).getImageurl()).into(holder.image);
+        Picasso.with(context.getApplicationContext()).load("http://192.168.1.103:3000" + data.get(0).getImageurl()).into(holder.image);
 
 
 

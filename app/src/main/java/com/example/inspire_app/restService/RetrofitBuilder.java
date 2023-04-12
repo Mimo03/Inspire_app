@@ -20,7 +20,7 @@ public class RetrofitBuilder {
     private Retrofit retrofit;
 
     //TODO:TO ADD BASE URL
-    private final static String BASEURL = "http://192.168.12.111:3000";
+    private final static String BASEURL = "http://192.168.1.103:3000";
 //    private final static String BASEURL = "https://0539-122-160-47-222.in.ngrok.io/";
 
     private static RetrofitBuilder mInstance;
