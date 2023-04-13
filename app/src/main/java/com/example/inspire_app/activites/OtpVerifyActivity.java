@@ -45,6 +45,9 @@ public class OtpVerifyActivity extends AppCompatActivity {
         verify = findViewById(R.id.verifyButton);
         resend = findViewById(R.id.resendotp);
 
+        Intent intent = getIntent();
+        String moodleID = intent.getStringExtra("moodleID");
+
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +63,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                     if(enteredOtp.equals(resendOtp)){
                         Toast.makeText(OtpVerifyActivity.this, "Verified", Toast.LENGTH_LONG).show();
                         Intent intent1 = new Intent(OtpVerifyActivity.this, ResetPasswordActivity.class);
+                        intent1.putExtra("moodleID", moodleID);
                         startActivity(intent1);
                     }else{
                         otplayout.setError("Invalid OTP");
@@ -71,7 +75,6 @@ public class OtpVerifyActivity extends AppCompatActivity {
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
                 String email = intent.getStringExtra("email");
                 String otp = btnSendEmail(email);
                 resendOtp = otp;

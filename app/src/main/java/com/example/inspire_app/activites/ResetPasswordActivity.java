@@ -12,9 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.inspire_app.R;
 import com.example.inspire_app.models.ChangePassModel;
+import com.example.inspire_app.models.ResetPassModel;
 import com.example.inspire_app.responsemodels.ChangePasswordResponse;
+import com.example.inspire_app.responsemodels.ResetPassResponse;
 import com.example.inspire_app.utils.LoginManager;
 import com.example.inspire_app.viewmodels.ChangePasswordViewModel;
+import com.example.inspire_app.viewmodels.ResetPassViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,7 +29,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
     Button reset;
     String newPassvalue, conPassvalue;
     LoginManager loginManager;
-    ChangePasswordViewModel changePasswordViewModel;
+    ResetPassViewModel resetPassViewModel;
+    String moodleID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
         newPasslayout = findViewById(R.id.text_input_layout_newPassword);
         conPasslayout = findViewById(R.id.text_input_layout_conPassword);
         reset = findViewById(R.id.resetButton);
+
+        Intent intent = getIntent();
+        moodleID = intent.getStringExtra("moodleID");
+
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +61,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
                 else{
                     if(newPassvalue.equals(conPassvalue)){
-//                        btncomment(loginManager.getid(), conPassvalue);
+                        btncomment(moodleID, conPassvalue);
                         Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
@@ -66,18 +74,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     }
 
-    private void btncomment(String _id,String password) {
+    private void btncomment(String moodleID,String password) {
 
-        ChangePassModel data = new ChangePassModel(_id,password);
+        ResetPassModel data = new ResetPassModel(moodleID,password);
         initViewModel2();
-        changePasswordViewModel.btnChangePass(this.getApplication(),data);
+        resetPassViewModel.btnChangePass(this.getApplication(),data);
     }
 
     private void initViewModel2() {
-        changePasswordViewModel = new ViewModelProvider(ResetPasswordActivity.this).get(ChangePasswordViewModel.class);
-        changePasswordViewModel.getCreateUserLiveData().observe(ResetPasswordActivity.this, new Observer<ChangePasswordResponse>() {
+        resetPassViewModel = new ViewModelProvider(ResetPasswordActivity.this).get(ResetPassViewModel.class);
+        resetPassViewModel.getCreateUserLiveData().observe(ResetPasswordActivity.this, new Observer<ResetPassResponse>() {
             @Override
-            public void onChanged(ChangePasswordResponse changePasswordResponse) {
+            public void onChanged(ResetPassResponse changePasswordResponse) {
                 if (changePasswordResponse == null) {
                     Toast.makeText(ResetPasswordActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 //                    error.setText("Please enter correct OTP");

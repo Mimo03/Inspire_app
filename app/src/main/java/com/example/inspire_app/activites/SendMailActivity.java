@@ -55,6 +55,7 @@ public class SendMailActivity extends AppCompatActivity {
                    Intent intent = new Intent(getApplicationContext(), OtpVerifyActivity.class);
                    intent.putExtra("OTP", otp);
                    intent.putExtra("email", email);
+                   intent.putExtra("moodleID", moodlevalue);
                    Toast.makeText(SendMailActivity.this, "OTP sent", Toast.LENGTH_LONG).show();
                    startActivity(intent);
                 }

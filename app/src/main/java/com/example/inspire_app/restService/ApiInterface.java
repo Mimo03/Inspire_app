@@ -4,6 +4,7 @@ import com.example.inspire_app.models.ChangePassModel;
 import com.example.inspire_app.models.CommentData;
 import com.example.inspire_app.models.PostLikedData;
 import com.example.inspire_app.models.ProfilePicData;
+import com.example.inspire_app.models.ResetPassModel;
 import com.example.inspire_app.responsemodels.ChangePasswordResponse;
 import com.example.inspire_app.responsemodels.CommentResponse;
 import com.example.inspire_app.responsemodels.DeleteLikedResponse;
@@ -14,6 +15,7 @@ import com.example.inspire_app.responsemodels.MostLikedResponse;
 import com.example.inspire_app.responsemodels.PostLikedResponse;
 import com.example.inspire_app.responsemodels.PostResponse;
 import com.example.inspire_app.responsemodels.ProfilePicResponse;
+import com.example.inspire_app.responsemodels.ResetPassResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -58,6 +60,9 @@ public interface ApiInterface {
 
     @POST("/password/update")
     Call<ChangePasswordResponse> changePass(@Header("Authorization") String Token, @Body ChangePassModel changePassModel);
+
+    @POST("/reset/update")
+    Call<ResetPassResponse> resetpass(@Header("Authorization") String Token, @Body ResetPassModel resetPassModel);
 
 }
 
