@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inspire_app.R;
@@ -23,6 +24,18 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
@@ -37,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     String apipass;
     TextInputLayout textInputLayoutMoodleId;
     TextInputLayout textInputLayoutPassword;
+    TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,15 @@ public class LoginActivity extends AppCompatActivity {
         textInputLayoutPassword = findViewById(R.id.text_input_layout_password);
         loginManager = new LoginManager(this);
         loginButton = findViewById(R.id.loginButton);
+        forgotPassword = findViewById(R.id.forgotpassword);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SendMailActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         loginButton.setOnClickListener(new DebouncedOnClickListener(800) {
