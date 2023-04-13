@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment {
                         try {
                             if (mostLikedResponse.getData() == null) {
 //
-                                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "No Post Found", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 likes = view.findViewById(R.id.hotpick_likes);
@@ -230,7 +230,6 @@ public class HomeFragment extends Fragment {
         adapter = new HorzRecyclerAdapter(getContext(), stringList, new Horzonclickrecycler() {
             @Override
             public void onclick(String category) {
-                Toast.makeText(getContext(), "clicked",Toast.LENGTH_SHORT).show();
                 viewModel.btnnewpost(getActivity().getApplication(),category, loginManager.getCategory());
                 viewModel.getCreateUserLiveData().observe(getActivity(), new Observer<PostResponse>() {
                     @Override
@@ -238,7 +237,7 @@ public class HomeFragment extends Fragment {
                         try {
                             if (postResponse.getData() == null) {
 //
-                                Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "No Post found", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 data = postResponse.getData();
@@ -254,7 +253,6 @@ public class HomeFragment extends Fragment {
                                 }, new LikedOnclickrecycler() {
                                     @Override
                                     public void onclick(String id, String category, String org, String image) {
-                                        Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG).show();
                                         btnpostclicked(id, category, org, image);
 //                        ImageButton imageButton = view.findViewById(R.id.likedbtn);
 //                        imageButton.setClickable(false);

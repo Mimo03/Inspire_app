@@ -20,35 +20,13 @@ public class RetrofitBuilder {
     private Retrofit retrofit;
 
     //TODO:TO ADD BASE URL
-    private final static String BASEURL = "http://192.168.12.127:3000";
+    private final static String BASEURL = "http://192.168.0.108:3000";
 //    private final static String BASEURL = "https://0539-122-160-47-222.in.ngrok.io/";
 
     private static RetrofitBuilder mInstance;
 
     private RetrofitBuilder(Application application) {
 
-        //  HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();F
-        //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-
-
-        //OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        // HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        // loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //clientBuilder.addInterceptor(loggingInterceptor);
-
-       /* OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60,TimeUnit.SECONDS).build();*/
-
-        /*ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
-                .tlsVersions(TlsVersion.TLS_1_2)
-                //todo need to be added on server currently onl suporting tls version 1_2
-               // .cipherSuites(CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
-                .build();*/
-
-        //   SSLContext sslContext = SslUtils.getSslContextForCertificateFile(context, "BPClass2RootCA-sha2.cer");
-        //   client.setSslSocketFactory(sslContext.getSocketFactory());
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //  .sslSocketFactory(tlsSocketFactory, tlsSocketFactory.getTrustManager())

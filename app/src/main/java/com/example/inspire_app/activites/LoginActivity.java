@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.inspire_app.R;
 import com.example.inspire_app.models.LoginData;
 import com.example.inspire_app.responsemodels.LoginResponse;
+import com.example.inspire_app.utils.DebouncedOnClickListener;
 import com.example.inspire_app.utils.LoginManager;
 import com.example.inspire_app.viewmodels.LoginViewModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -50,9 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
 
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new DebouncedOnClickListener(800) {
             @Override
-            public void onClick(View view) {
+            public void onDebouncedClick(View v) {
                 moodleid = username.getText().toString();
                 password2 = password.getText().toString();
                 if (moodleid.isEmpty()) {
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
 
-                            }
+                        }
 
                     });
 
@@ -108,5 +109,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:text="comment blah blah"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColor"
                 android:textSize="14dp"/>
 
         </LinearLayout>

@@ -97,7 +97,7 @@ public class PostActivity extends AppCompatActivity {
                         arraylist = getDetailsResponse.getData().get(0).getAllcomment();
                         comments = getDetailsResponse.getData().get(0).getComments();
                         id = getDetailsResponse.getData().get(0).get_id();
-                        Picasso.with(PostActivity.this).load("http://192.168.12.127:3000" + getDetailsResponse.getData().get(0).getImageurl()).into(postimage);
+                        Picasso.with(PostActivity.this).load("http://192.168.0.108:3000" + getDetailsResponse.getData().get(0).getImageurl()).into(postimage);
 
                     }
                 }catch (Exception e) {
@@ -118,7 +118,6 @@ public class PostActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         comment = textInputEditText.getText().toString();
                         btncomment(comment,id);
-                        viewModel.btndetails(PostActivity.this.getApplication(),_id);
 
 
                     }
@@ -163,6 +162,7 @@ public class PostActivity extends AppCompatActivity {
                     Toast.makeText(PostActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 //                    error.setText("Please enter correct OTP");
                 } else {
+                    viewModel.btndetails(PostActivity.this.getApplication(),_id);
                     textInputEditText.setText(" ");
                     Toast.makeText(PostActivity.this, commentResponse.getMessage(), Toast.LENGTH_SHORT).show();
 

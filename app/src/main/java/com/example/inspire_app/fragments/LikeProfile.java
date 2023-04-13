@@ -66,7 +66,7 @@ public class LikeProfile extends Fragment {
                 try {
                     if (getLikedResponse.getData() == null) {
 //
-                        Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "No liked post found", Toast.LENGTH_SHORT).show();
 
                     } else {
                         data = getLikedResponse.getData();

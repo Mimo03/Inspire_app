@@ -110,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Comments"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColor"
                 android:textSize="17dp" />
             <LinearLayout
                 android:id="@+id/comment_section"

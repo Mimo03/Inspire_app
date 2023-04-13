@@ -75,4 +75,9 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.inspire_app.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -103,6 +104,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Toast.makeText(ChangePasswordActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 //                    error.setText("Please enter correct OTP");
                 } else {
+                    onBackPressed();
                     Toast.makeText(ChangePasswordActivity.this, changePasswordResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
